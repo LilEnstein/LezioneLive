@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-slate-50 font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+  }
+}
+
+/* Nháy nền khi nhảy tới một segment (mốc thời gian, ghim, tìm kiếm). */
+@keyframes flash-highlight {
+  0% {
+    background-color: rgb(250 204 21 / 0.55);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.flash-highlight {
+  animation: flash-highlight 1.6s ease-out;
+}
+
+/* Thanh tab cuộn ngang được nhưng không hiện thanh cuộn. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* KaTeX trong bong bóng chat: không tràn ngang. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}

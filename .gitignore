@@ -1,0 +1,93 @@
+# =============================================================================
+# LezioneLive — .gitignore
+# Mục tiêu: không bao giờ commit key/token/đăng nhập Claude, dữ liệu buổi học hay file máy cục bộ.
+# Kiểm tra trước khi push:  git status --ignored   và   git check-ignore -v <file>
+# =============================================================================
+
+# --- Claude Code / tài khoản Claude ------------------------------------------
+# Cấu hình Claude Code riêng của máy (launch.json chứa đường dẫn C:\Users\<tên>\..., settings.local.json
+# có thể chứa quyền, biến môi trường, token). Đăng nhập Claude Pro/Max nằm ở ~/.claude, không nằm trong repo,
+# nhưng chặn luôn mọi bản sao lỡ tay chép vào đây.
+.claude/
+.claude.json
+.claude.json.backup*
+.credentials.json
+**/.credentials.json
+CLAUDE.local.md
+claude_code/
+
+# --- Biến môi trường & bí mật -----------------------------------------------
+# Chỉ commit .env.example (không có giá trị thật).
+.env
+.env.*
+!.env.example
+*.env
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*_key.pem
+secrets/
+credentials*.json
+token*.json
+
+# --- Dữ liệu cục bộ của app (SQLite, slide, log, bản ghi, model) --------------
+# Mặc định app lưu ở %LOCALAPPDATA%\LezioneLive (ngoài repo); các mục dưới đây phòng khi chạy với
+# --data-dir trỏ vào trong repo.
+backend/data/
+data/
+demo-data/
+inclass-data/
+scratchpad/
+logs/
+*.log
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.wav
+*.webm
+*.mp3
+*.m4a
+!backend/tests/fixtures/audio/*.wav
+*.csv
+# Model tải về (Whisper, NLLB, WeSpeaker) — tải lại trong app, không commit
+models/
+hf-cache/
+.cache/
+*.onnx
+*.bin
+*.safetensors
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Node / frontend -----------------------------------------------------------
+node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+*.tsbuildinfo
+npm-debug.log*
+
+# --- OS / editor -------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

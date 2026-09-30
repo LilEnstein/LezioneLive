@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lezionelive"
+version = "1.0.0"
+description = "Trợ lý dịch trực tiếp và học tập cho bài giảng tiếng Ý trên MS Teams, tích hợp Claude API"
+readme = "../README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic-settings>=2.4",
+    "sqlmodel>=0.0.22",
+    "anthropic>=1.8,<2",
+    "keyring>=25",
+    "numpy>=1.26",
+    "onnxruntime>=1.18",
+    "faster-whisper>=1.1",
+    "pypdf>=5",
+    "python-multipart>=0.0.9",
+    "markdown>=3.6",
+    "latex2mathml>=3.77",
+    "platformdirs>=4",
+    "httpx>=0.27",
+    "soundcard>=0.4.3",
+    "psutil>=5.9",
+    # Chế độ lớp học trực tiếp: HTTPS cho điện thoại (chứng chỉ tự ký), mã QR ghép nối, ảnh chụp bảng
+    "cryptography>=42",
+    "qrcode>=7.4",
+    "pillow>=10",
+]
+
+[project.optional-dependencies]
+# Thư viện CUDA 12 cho faster-whisper chạy GPU trên Windows/Linux (NVIDIA).
+gpu = ["nvidia-cublas-cu12", "nvidia-cudnn-cu12>=9,<10"]
+# Xuất PDF bằng WeasyPrint (cần Pango/GTK). Mặc định app dùng Chrome/Edge headless.
+pdf = ["weasyprint>=62"]
+# Khử nhiễu RNNoise cho lớp học trực tiếp. App chỉ dùng DLL đi kèm gói, nên scripts/setup cài bằng
+# `pip install --no-deps pyrnnoise` (bỏ qua matplotlib/audiolab). Không có thì dùng bộ lọc phổ tích hợp.
+denoise = ["pyrnnoise>=0.4"]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.6", "jiwer>=3.0"]
+
+[project.scripts]
+lezionelive = "app.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["llm/prompts/*.md"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501", "B008"]

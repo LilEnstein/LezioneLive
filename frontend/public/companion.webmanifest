@@ -1,0 +1,14 @@
+{
+  "name": "LezioneLive — Điện thoại",
+  "short_name": "LezioneLive",
+  "description": "Micro và phụ đề trên điện thoại cho buổi học trực tiếp",
+  "start_url": "/c",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    { "src": "/companion-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
