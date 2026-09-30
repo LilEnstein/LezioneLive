@@ -2,6 +2,8 @@
   "name": "lezionelive-frontend",
   "private": true,
   "version": "1.0.0",
+  "author": "Turin <brolai1204@gmail.com>",
+  "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "dev": "vite",

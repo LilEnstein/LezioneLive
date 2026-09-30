@@ -14,6 +14,7 @@ import type {
   GlossaryTerm,
   Health,
   InClassStatus,
+  LicenseStatus,
   LocalModelInfo,
   Metrics,
   MicDevice,
@@ -109,6 +110,8 @@ function qs(params: Record<string, string | number | boolean | null | undefined>
 
 export const api = {
   health: () => get<Health>("/health"),
+  licenseStatus: () => get<LicenseStatus>("/license/status"),
+  licenseActivate: (email: string, code: string) => post<LicenseStatus>("/license/activate", { email, code }),
   settings: () => get<SettingsResponse>("/settings"),
   putSettings: (patchBody: Partial<SettingsResponse["settings"]>) => put<SettingsResponse>("/settings", patchBody),
   putApiKey: (api_key: string) =>

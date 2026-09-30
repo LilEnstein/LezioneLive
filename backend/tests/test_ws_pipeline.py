@@ -127,7 +127,7 @@ def test_source_ended_pauses_session(client):
 
 def test_restart_keeps_transcript_and_resumes_numbering(harness):
     """AC-04: tắt backend giữa phiên → khởi động lại vẫn còn segment, phiên chuyển sang tạm dừng."""
-    app = create_app(harness.env, context_factory=context_factory(harness))
+    app = create_app(harness.env, context_factory=context_factory(harness), require_license=False)
     with TestClient(app, base_url="http://127.0.0.1:8765") as c:
         sid = c.post("/api/sessions", json={"title": "Crash"}).json()["session_id"]
         with c.websocket_connect(f"ws://127.0.0.1:8765/ws/session/{sid}", headers=WS_HEADERS) as ws:
@@ -141,7 +141,7 @@ def test_restart_keeps_transcript_and_resumes_numbering(harness):
             before = len(list(s.exec(select(Segment).where(Segment.session_id == sid))))
     assert before >= 2
 
-    app2 = create_app(harness.env, context_factory=context_factory(harness))
+    app2 = create_app(harness.env, context_factory=context_factory(harness), require_license=False)
     with TestClient(app2, base_url="http://127.0.0.1:8765") as c2:
         detail = c2.get(f"/api/sessions/{sid}").json()
         assert detail["session"]["status"] == "paused"

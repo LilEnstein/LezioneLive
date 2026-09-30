@@ -1,5 +1,9 @@
 # LezioneLive
 
+> **Created by Turin** · © 2026 Turin, bảo lưu mọi quyền ([LICENSE](LICENSE)). Mọi commit được ký số
+> ([chữ ký tác giả](docs/chu-ky-tac-gia.md)). Cần **mã kích hoạt riêng** mới dùng được: gửi email tới
+> brolai1204@gmail.com để xin mã (6 chữ số trộn với chữ TURIN), rồi nhập email + mã ở màn hình đầu tiên của app.
+
 Trợ lý dịch trực tiếp và học tập cho các buổi học bằng tiếng Ý — online trên MS Teams hoặc trong lớp học trực tiếp —
 tích hợp Claude.
 

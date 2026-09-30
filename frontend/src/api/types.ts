@@ -203,6 +203,13 @@ export interface KeyInfo {
   source: "env" | "keychain" | null;
 }
 
+export interface LicenseStatus {
+  active: boolean;
+  email: string | null;
+  author: string;
+  contact: string;
+}
+
 export interface Health {
   status: string;
   version: string;

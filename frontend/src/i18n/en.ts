@@ -53,6 +53,15 @@ export const en: Record<MessageKey, string> = {
   "gate.body": "The UI cannot reach the local backend (http://127.0.0.1:8765). Start the backend:",
   "gate.retrying": "Retrying automatically every 3 seconds…",
 
+  "license.title": "Activate LezioneLive",
+  "license.body": "This copy of LezioneLive needs a personal activation code issued by its author {author} for your email. No code yet? Email {contact} to request one.",
+  "license.email": "Registered email",
+  "license.code": "Activation code",
+  "license.code_hint": "6 digits mixed with the letters TURIN, e.g. 4TU82RI7N19. Not case-sensitive.",
+  "license.submit": "Activate",
+  "license.request": "Request a code by email",
+  "license.pull_hint": "Just got a code but it is rejected? Run git pull to update the license list, then restart the app.",
+
   "home.start": "Start a lecture",
   "home.courses": "Courses",
   "home.all_courses": "All courses",

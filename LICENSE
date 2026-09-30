@@ -1,0 +1,19 @@
+LezioneLive — Created by Turin
+Copyright (c) 2026 Turin <brolai1204@gmail.com>. All rights reserved.
+
+Bản quyền thuộc về Turin. Mã nguồn được công khai để tham khảo, KHÔNG phải phần mềm mã nguồn mở.
+
+1. Được phép: xem mã nguồn; cài đặt và chạy LezioneLive cho mục đích học tập cá nhân khi đã được Turin
+   cấp mã kích hoạt riêng theo email (xem "Kích hoạt" trong README).
+2. Không được phép khi chưa có văn bản đồng ý của Turin: sao chép, phân phối lại, bán, cho thuê, công bố
+   lại dưới tên khác; gỡ bỏ, vô hiệu hoá hoặc lách cơ chế kích hoạt; xoá hay sửa dòng "Created by Turin",
+   thông báo bản quyền này hoặc thông tin tác giả.
+3. Mã kích hoạt gắn với một email, không được chia sẻ hay chuyển nhượng. Turin có thể thu hồi bất kỳ lúc nào.
+4. Phần mềm được cung cấp "NGUYÊN TRẠNG", không kèm bảo đảm dưới bất kỳ hình thức nào. Tác giả không chịu
+   trách nhiệm cho thiệt hại phát sinh từ việc sử dụng.
+
+Chữ ký số của tác giả (khoá ký commit/tag SSH Ed25519):
+  SHA256:+8F/Y7wHl/w7U4U8aP5N6zvHFLV7COzV4mjr9LICYf4
+  Kiểm tra: xem docs/chu-ky-tac-gia.md
+
+Liên hệ xin mã / xin phép: brolai1204@gmail.com

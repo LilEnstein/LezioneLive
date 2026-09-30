@@ -31,6 +31,8 @@ claude_code/
 secrets/
 credentials*.json
 token*.json
+# Sổ mã kích hoạt gốc (email + mã) của Turin — chỉ licenses.json (đã băm) được commit
+licenses.local.json
 
 # --- Dữ liệu cục bộ của app (SQLite, slide, log, bản ghi, model) --------------
 # Mặc định app lưu ở %LOCALAPPDATA%\LezioneLive (ngoài repo); các mục dưới đây phòng khi chạy với

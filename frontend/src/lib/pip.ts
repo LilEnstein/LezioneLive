@@ -1,6 +1,8 @@
 /** Document Picture-in-Picture (Chrome/Edge 116+): cửa sổ phụ đề nổi đặt đè lên Teams (mục 12.4). */
 import { useCallback, useEffect, useState } from "react";
 
+import { CREATED_BY } from "./branding";
+
 interface DocumentPictureInPicture {
   requestWindow(options?: { width?: number; height?: number }): Promise<Window>;
   window: Window | null;
@@ -44,7 +46,7 @@ export function useDocumentPip() {
     if (!window.documentPictureInPicture) throw new Error("unsupported");
     const win = await window.documentPictureInPicture.requestWindow({ width, height });
     copyStyles(win.document);
-    win.document.title = "LezioneLive";
+    win.document.title = `LezioneLive · ${CREATED_BY}`;
     win.document.body.className = "bg-slate-950 text-slate-100";
     win.addEventListener("pagehide", () => setPipWindow(null));
     setPipWindow(win);

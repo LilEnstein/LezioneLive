@@ -413,7 +413,7 @@ def client(harness: Harness):
 
     from app.main import create_app
 
-    app = create_app(harness.env, context_factory=context_factory(harness))
+    app = create_app(harness.env, context_factory=context_factory(harness), require_license=False)
     with TestClient(app, base_url="http://127.0.0.1:8765") as c:
         c.ctx = app.state.ctx  # type: ignore[attr-defined]
         yield c

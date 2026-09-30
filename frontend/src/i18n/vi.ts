@@ -52,6 +52,15 @@ export const vi = {
   "gate.body": "Giao diện không kết nối được tới backend cục bộ (http://127.0.0.1:8765). Hãy khởi động backend:",
   "gate.retrying": "Đang tự thử kết nối lại mỗi 3 giây…",
 
+  "license.title": "Kích hoạt LezioneLive",
+  "license.body": "Bản LezioneLive này cần mã kích hoạt riêng do tác giả {author} cấp theo email. Chưa có mã? Gửi email tới {contact} để xin mã.",
+  "license.email": "Email đã đăng ký",
+  "license.code": "Mã kích hoạt",
+  "license.code_hint": "Gồm 6 chữ số trộn với chữ TURIN, ví dụ 4TU82RI7N19. Không phân biệt hoa thường.",
+  "license.submit": "Kích hoạt",
+  "license.request": "Xin mã qua email",
+  "license.pull_hint": "Vừa được cấp mã mà vẫn báo sai? Chạy git pull để cập nhật danh sách bản quyền rồi khởi động lại app.",
+
   "home.start": "Bắt đầu buổi học",
   "home.courses": "Môn học",
   "home.all_courses": "Tất cả môn học",

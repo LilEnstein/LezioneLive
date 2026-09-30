@@ -1,0 +1,12 @@
+{
+  "issuer": "Turin",
+  "licenses": [
+    {
+      "email_hash": "1999ada0e3ff4d806424c5732b353f69e5c3d1c6a6ef0c191fa66bb1f5efc7c6",
+      "salt": "53a1dca7418d11fd55ec29aa9da3bee9",
+      "hash": "a429a45c44f9a16cb9a5de18b16edf45f71b5dbeb0b59123be85c8ea96289b93",
+      "issued": "2026-10-01",
+      "revoked": false
+    }
+  ]
+}

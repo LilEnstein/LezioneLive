@@ -6,12 +6,20 @@ import { createRoot } from "react-dom/client";
 import { LucideProvider } from "lucide-react";
 
 import App from "./App";
+import { CreatedBy } from "./components/CreatedBy";
+import { LicenseGate } from "./components/LicenseGate";
+import { applyBranding } from "./lib/branding";
+
+applyBranding();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     {/* Bộ icon Lucide dùng chung: 16 px, nét 1.75 (ghi đè cỡ bằng class Tailwind h-4, w-5…). */}
     <LucideProvider size={16} strokeWidth={1.75}>
-      <App />
+      <LicenseGate>
+        <App />
+      </LicenseGate>
+      <CreatedBy />
     </LucideProvider>
   </StrictMode>,
 );

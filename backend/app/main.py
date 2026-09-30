@@ -22,6 +22,8 @@ from app.companion import routes as companion_routes
 from app.companion.server import add_static_routes
 from app.config import VERSION, EnvSettings
 from app.context import AppContext, build_context, recover_sessions
+from app.licensing import AUTHOR, LicenseGate, LicenseMiddleware, LicenseState
+from app.licensing import router as license_router
 from app.llm.client import LLMError
 from app.routers import (
     chat,
@@ -86,6 +88,7 @@ class TimingMiddleware:
                 dur = (time.perf_counter() - start) * 1000
                 headers = list(message.get("headers", []))
                 headers.append((b"server-timing", f"app;dur={dur:.1f}".encode()))
+                headers.append((b"x-created-by", AUTHOR.encode()))
                 message["headers"] = headers
                 if dur > 1000:
                     log.info("Request chậm %s %s: %.0f ms", scope["method"], scope["path"], dur)
@@ -126,8 +129,12 @@ def _mount_frontend(app: FastAPI, dist: Path) -> None:
 def create_app(
     env: EnvSettings | None = None,
     context_factory: Callable[[EnvSettings], AppContext] | None = None,
+    require_license: bool = True,
 ) -> FastAPI:
     env = env or EnvSettings()
+    gate = LicenseGate(env.data_dir / "license.json")
+    if not require_license:
+        gate.state = LicenseState(active=True)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -139,7 +146,9 @@ def create_app(
         startup = ctx.settings.get()
         if not env.disable_stt_autoload and (startup.offline_draft or startup.translate_provider == "local"):
             ctx.draft.start_prepare(download=False)  # nạp sẵn model dịch cục bộ nếu đã tải
-        log.info("LezioneLive %s sẵn sàng tại http://%s:%s (dữ liệu: %s)", VERSION, env.host, env.port, env.data_dir)
+        if not gate.state.active:
+            log.warning("LezioneLive chưa kích hoạt: mở giao diện và nhập mã do %s cấp", AUTHOR)
+        log.info("LezioneLive %s (created by %s) sẵn sàng tại http://%s:%s (dữ liệu: %s)", VERSION, AUTHOR, env.host, env.port, env.data_dir)
         try:
             yield
         finally:
@@ -148,13 +157,17 @@ def create_app(
     app = FastAPI(
         title="LezioneLive API",
         version=VERSION,
+        description=f"Created by {AUTHOR}",
         lifespan=lifespan,
         docs_url="/api/docs",
         openapi_url="/api/openapi.json",
         redoc_url=None,
     )
 
+    app.state.license = gate
+
     # Thứ tự: middleware thêm sau cùng nằm ngoài cùng.
+    app.add_middleware(LicenseMiddleware, gate=gate)
     app.add_middleware(TimingMiddleware)
     app.add_middleware(LocalOnlyMiddleware, allowed_origins=env.allowed_origins)
     app.add_middleware(
@@ -187,6 +200,7 @@ def create_app(
 
     for module in (settings, courses, sessions, chat, glossary, slides, export, flashcards, search, inclass, companion):
         app.include_router(module.router, prefix="/api")
+    app.include_router(license_router, prefix="/api")
     app.include_router(ws_ingest.router)
     # Trang điện thoại đồng hành cũng mở được ngay trên laptop (http://127.0.0.1:8765/c?t=...).
     app.include_router(companion_routes.router)
